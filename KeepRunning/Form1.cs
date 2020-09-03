@@ -1,4 +1,5 @@
-﻿using ClassLibraryHelper;
+﻿using AutoUpdaterDotNET;
+using ClassLibraryHelper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -102,6 +103,23 @@ namespace KeepRunning
                                             }
                                             else if (item.UpdateExpiredTime > DateTime.Now != true)
                                             {
+                                                if (item.TypeCheckRun == eTypeCheckRun.ByProcessName)
+                                                {
+                                                    var f = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(item.PathExe)).FirstOrDefault(q => q.MainModule.FileName == item.PathExe);
+                                                    if (f != null)
+                                                    {
+                                                        if (f.Responding)
+                                                        {
+                                                            item.CountNotRun = 0;
+                                                            item.Message = "OK";
+                                                            continue;
+                                                        }
+                                                        else
+                                                        {
+                                                            item.Message = "Not Responding";
+                                                        }
+                                                    }
+                                                }
                                                 item.CountNotRun++;
                                                 if (item.CountNotRun >= 15)
                                                 {
@@ -208,10 +226,13 @@ namespace KeepRunning
         private void _initForm()
         {
             dataGridView1.AutoGenerateColumns = false;
+            Column_KieuCheck.DataSource = Enum.GetValues(typeof(eTypeCheckRun));
+
             var pros = new[] {
                 nameof(AppInfo.Name),
                 nameof(AppInfo.Message),
                 nameof(AppInfo.CountNotRun),
+                nameof(AppInfo.TypeCheckRun),
                 nameof(AppInfo.PathExe),
             };
             for (int i = 0; i < pros.Length; i++)
@@ -239,7 +260,7 @@ namespace KeepRunning
                                 cancellationToken.Cancel();
                                 _bindingAppInfo.Remove(f);
 
-                                XmlHelper.SerializeToXmlFile(_bindingAppInfo.ToList(), FILE_CONFIG);
+                                _save();
                                 _reRun();
                             });
                         }
@@ -263,11 +284,12 @@ namespace KeepRunning
                         Message = "---",
                         Name = Path.GetFileNameWithoutExtension(item),
                         PathExe = item,
-                        UpdateExpiredTime = null
+                        UpdateExpiredTime = null,
+                        TypeCheckRun = eTypeCheckRun.ByFileRun
                     });
                 }
 
-                XmlHelper.SerializeToXmlFile(_bindingAppInfo.ToList(), FILE_CONFIG);
+                _save();
                 _reRun();
             }
         }
@@ -304,6 +326,46 @@ namespace KeepRunning
                         }
                     }
                 }
+            }
+        }
+
+        private void thoátToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cancellationToken?.Cancel();
+            cancellationToken = null;
+            Close();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            cancellationToken = null;
+            cancellationToken?.Cancel();
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _save();
+        }
+
+        private void _save()
+        {
+            dataGridView1.EndEdit();
+            XmlHelper.SerializeToXmlFile(_bindingAppInfo.ToList(), FILE_CONFIG);
+        }
+
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        { }
+
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _reRun();
+        }
+
+        private void checkForUpdareToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (mbox)
+            {
+                AutoUpdater.Start();
             }
         }
     }
@@ -361,5 +423,11 @@ namespace KeepRunning
             this.IsUpdate = isUpdate;
             File.Create(Form1.FILE_UPDATE).Close();
         }
+    }
+
+    public enum eTypeCheckRun
+    {
+        ByProcessName,
+        ByFileRun
     }
 }

@@ -1,0 +1,279 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>StartupHelper</name>
+    </assembly>
+    <members>
+        <member name="T:StartupHelper.RegistrationScope">
+            <summary>
+            Scopes for registering a startup directive
+            </summary>
+        </member>
+        <member name="F:StartupHelper.RegistrationScope.Local">
+            <summary>
+            Localuser
+            </summary>
+        </member>
+        <member name="F:StartupHelper.RegistrationScope.Global">
+            <summary>
+            Machine
+            </summary>
+        </member>
+        <member name="T:StartupHelper.StartupManager">
+            <summary>
+                A class for managing the startup of the application.
+            </summary>
+        </member>
+        <member name="M:StartupHelper.StartupManager.#ctor(System.String,StartupHelper.RegistrationScope)">
+            <summary>
+                Simplest form for initializing an instance of the class, with
+                providing a <paramref name="name" /> for the program and specifying
+                an <paramref name="scope" />.
+            </summary>
+            <param name="name">
+                A unique name for the rule as an alias for the program
+            </param>
+            <param name="scope">
+                Scope in which startup rule should be created or managed
+            </param>
+        </member>
+        <member name="M:StartupHelper.StartupManager.#ctor(System.String,StartupHelper.RegistrationScope,System.Boolean)">
+            <summary>
+                Initializing an instance of the class, with providing a
+                <paramref name="name" /> for the program, specifying an
+                <paramref name="scope" /> and explicitly specifying the dependency on
+                administrator privileges.
+            </summary>
+            <param name="name">
+                A unique name for the rule as an alias for the program
+            </param>
+            <param name="scope">
+                Scope in which startup rule should be created or managed
+            </param>
+            <param name="needsAdminPrivileges">
+                Set to True if the program should be executed with administrator's
+                rights
+            </param>
+        </member>
+        <member name="M:StartupHelper.StartupManager.#ctor(System.String,System.String,StartupHelper.RegistrationScope,System.Boolean)">
+            <summary>
+                Initializing an instance of the class, with providing the filename
+                of the starting executable file, a <paramref name="name" /> for the
+                program, specifying an <paramref name="scope" /> and explicitly
+                specifying the dependency on administrator privileges.
+            </summary>
+            <param name="applicationImage">
+                The address of the executable file of the application
+            </param>
+            <param name="name">
+                A unique name for the rule as an alias for the program
+            </param>
+            <param name="scope">
+                Scope in which startup rule should be created or managed
+            </param>
+            <param name="needsAdminPrivileges">
+                Set to True if the program should be executed with administrator's
+                rights
+            </param>
+        </member>
+        <member name="M:StartupHelper.StartupManager.#ctor(System.String,System.String,StartupHelper.RegistrationScope,StartupHelper.StartupProviders,System.Boolean)">
+            <summary>
+                Initializing an instance of the class, with providing the filename
+                of the starting executable file, a <paramref name="name" /> for the
+                program, specifying an <paramref name="scope" /> and explicitly
+                specifying the dependency on administrator privileges.
+            </summary>
+            <param name="applicationImage">
+                The address of the executable file of the application
+            </param>
+            <param name="name">
+                A unique name for the rule as an alias for the program
+            </param>
+            <param name="scope">
+                Scope in which startup rule should be created or managed
+            </param>
+            <param name="provider">
+                Method that is expected to be used for registering the program
+                startup
+            </param>
+            <param name="needsAdminPrivileges">
+                Set to True if the program should be executed with administrator's
+                rights
+            </param>
+        </member>
+        <member name="M:StartupHelper.StartupManager.#ctor(System.String,System.String,StartupHelper.RegistrationScope,System.Boolean,System.String)">
+            <summary>
+                Initializing an instance of the class, with providing the filename
+                of the starting executable file, a <paramref name="name" /> for the
+                program, specifying an <paramref name="scope" /> and explicitly
+                specifying the dependency on administrator privileges. Using this
+                constructor you can specify a custom string to be used as the
+                startup indicator. Make sure that there is no other string similar
+                to this string in your expected command line arguments to conflict
+                with it.
+            </summary>
+            <param name="applicationImage">
+                The address of the executable file of the application
+            </param>
+            <param name="name">
+                A unique name for the rule as an alias for the program
+            </param>
+            <param name="scope">
+                Scope in which startup rule should be created or managed
+            </param>
+            <param name="needsAdminPrivileges">
+                Set to True if the program should be executed with administrator's
+                rights
+            </param>
+            <param name="startupSpecialArgument">
+                A special string to send to the program when started and to detect
+                the automatic startup
+            </param>
+            <exception cref="T:System.ArgumentException">Bad argument value.</exception>
+        </member>
+        <member name="M:StartupHelper.StartupManager.#ctor(System.String,System.String,StartupHelper.RegistrationScope,System.Boolean,StartupHelper.StartupProviders,System.String)">
+            <summary>
+                Initializing an instance of the class, with providing the filename
+                of the starting executable file, a <paramref name="name" /> for the
+                program, specifying an <paramref name="scope" /> and explicitly
+                specifying the dependency on administrator privileges. Using this
+                constructor you can specify a custom string to be used as the
+                startup indicator. Make sure that there is no other string similar
+                to this string in your expected command line arguments to conflict
+                with it.
+            </summary>
+            <param name="applicationImage">
+                The address of the executable file of the application
+            </param>
+            <param name="name">
+                A unique name for the rule as an alias for the program
+            </param>
+            <param name="scope">
+                Scope in which startup rule should be created or managed
+            </param>
+            <param name="needsAdminPrivileges">
+                Set to True if the program should be executed with administrator's
+                rights
+            </param>
+            <param name="provider">
+                Method that is expected to be used for registering the program
+                startup
+            </param>
+            <param name="startupSpecialArgument">
+                A special string to send to the program when started and to detect
+                the automatic startup
+            </param>
+            <exception cref="T:System.ArgumentException">Bad argument value.</exception>
+        </member>
+        <member name="P:StartupHelper.StartupManager.IsFileSystemCaseSensitive">
+            <summary>
+                Value of <c>this</c> property shows if the OS's file system is case
+                sensitive.
+            </summary>
+        </member>
+        <member name="P:StartupHelper.StartupManager.IsElevated">
+            <summary>
+                Value of <c>this</c> property shows if the current program executed with
+                administrator rights.
+            </summary>
+        </member>
+        <member name="P:StartupHelper.StartupManager.StartupSpecialArgument">
+            <summary>
+                A special string to be used as the argument to the program when started to detect auto start sessions
+            </summary>
+        </member>
+        <member name="P:StartupHelper.StartupManager.NeedsAdministrativePrivileges">
+            <summary>
+                Indicates if the registered rule should make sure that program is
+                going to be executed with administrator rights
+            </summary>
+        </member>
+        <member name="P:StartupHelper.StartupManager.WorkingDirectory">
+            <summary>
+                Indicates the working directory in which the program should be
+                executed with
+            </summary>
+        </member>
+        <member name="P:StartupHelper.StartupManager.RegistrationScope">
+            <summary>
+                Shows the scope in which the rule for auto start is going to be
+                registered/removed or modified
+            </summary>
+        </member>
+        <member name="P:StartupHelper.StartupManager.ApplicationImage">
+            <summary>
+                Address of the executable file
+            </summary>
+        </member>
+        <member name="P:StartupHelper.StartupManager.Name">
+            <summary>
+                A unique name to be used as the rule name
+            </summary>
+        </member>
+        <member name="P:StartupHelper.StartupManager.Provider">
+            <summary>
+                The underlying method that is used by the class to manage the
+                startup functionality
+            </summary>
+        </member>
+        <member name="P:StartupHelper.StartupManager.IsStartedUp">
+            <summary>
+                Indicates if <c>this</c> session is started as startup
+            </summary>
+        </member>
+        <member name="P:StartupHelper.StartupManager.CommandLineArguments">
+            <summary>
+                Returns the correct command line arguments used to start <c>this</c>
+                session without special startup argument, if presented
+            </summary>
+        </member>
+        <member name="P:StartupHelper.StartupManager.IsRegistered">
+            <summary>
+                Indicates if there is any active rule by the unique name provided
+            </summary>
+        </member>
+        <member name="M:StartupHelper.StartupManager.Unregister">
+            <summary>
+                Removes the rule if exists
+            </summary>
+            <returns>
+                A value indicating the success of the operation
+            </returns>
+        </member>
+        <member name="M:StartupHelper.StartupManager.Register(System.String)">
+            <summary>
+                Creates or replace the existing rule
+            </summary>
+            <param name="arguments">
+                Special <c>arguments</c> to be sent to the application at startup
+            </param>
+            <returns>
+                A value indicating the success of the operation
+            </returns>
+        </member>
+        <member name="M:StartupHelper.StartupManager.FixWorkingDirectory">
+            <summary>
+                Fixes the working directory of the current session if it is not the
+                same as the directory in which the executable file resists. Put
+                <c>this</c> line in your application's program.cs file. There is no
+                need to do so if you use the constructor without specifying the
+                address of the executable file.
+            </summary>
+        </member>
+        <member name="T:StartupHelper.StartupProviders">
+            <summary>
+            Methods for implementing startup functionality.
+            </summary>
+        </member>
+        <member name="F:StartupHelper.StartupProviders.Task">
+            <summary>
+            Task Scheduler
+            </summary>
+        </member>
+        <member name="F:StartupHelper.StartupProviders.Registry">
+            <summary>
+            Windows Registry
+            </summary>
+        </member>
+    </members>
+</doc>

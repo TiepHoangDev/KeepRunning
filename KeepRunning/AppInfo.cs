@@ -14,5 +14,6 @@ namespace KeepRunning
         public string Message { get; set; }
         public int CountNotRun { get; set; }
         public DateTime? UpdateExpiredTime { get; set; }
+        public eTypeCheckRun TypeCheckRun { get; set; } = eTypeCheckRun.ByProcessName;
     }
 }
