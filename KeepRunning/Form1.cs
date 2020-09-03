@@ -363,9 +363,21 @@ namespace KeepRunning
 
         private void checkForUpdareToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (mbox)
+            if (MessageBox.Show("Kiểm tra cập nhật?", "Xác nhận", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                AutoUpdater.Start();
+                AutoUpdater.Start("https://github.com/TiepHoangDev/KeepRunning/raw/master/KeepRunning/autoupdate/AutoUpdater.xml");
+
+                AutoUpdater.CheckForUpdateEvent += (arg) =>
+                {
+                    if (arg.IsUpdateAvailable)
+                    {
+                        AutoUpdater.ShowUpdateForm(arg);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không có bản cập nhật mới");
+                    }
+                };
             }
         }
     }
