@@ -100,7 +100,7 @@ namespace KeepRunning
                                                 item.UpdateExpiredTime = DateTime.Now.AddMinutes(30);
                                                 item.Message = $"Updating... Expired: {item.UpdateExpiredTime:HH:mm:ss dd/MM/yyyy}";
                                             }
-                                            else if (item.UpdateExpiredTime > DateTime.Now == false)
+                                            else if (item.UpdateExpiredTime > DateTime.Now != true)
                                             {
                                                 item.CountNotRun++;
                                                 if (item.CountNotRun >= 15)
@@ -170,7 +170,10 @@ namespace KeepRunning
                                                     {
                                                         foreach (var p in Process.GetProcessesByName(Path.GetFileNameWithoutExtension(item.PathExe)))
                                                         {
-                                                            p.Kill();
+                                                            if (p.MainModule.FileName == item.PathExe)
+                                                            {
+                                                                p.Kill();
+                                                            }
                                                         }
                                                         Process.Start(item.PathExe);
                                                         item.Message = "re-opened";
