@@ -104,7 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="restart.ico" />
-    <Content Include="AutoUpdater.xml" />
+    <Content Include="autoupdate\AutoUpdater.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
