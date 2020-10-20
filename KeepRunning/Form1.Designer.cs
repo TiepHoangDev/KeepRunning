@@ -91,7 +91,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(790, 81);
+            this.panel1.Size = new System.Drawing.Size(1050, 81);
             this.panel1.TabIndex = 3;
             // 
             // label_restart
@@ -120,7 +120,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 105);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(790, 178);
+            this.panel2.Size = new System.Drawing.Size(1050, 178);
             this.panel2.TabIndex = 4;
             // 
             // dataGridView1
@@ -159,7 +159,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(790, 178);
+            this.dataGridView1.Size = new System.Drawing.Size(1050, 178);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
             // 
@@ -232,7 +232,7 @@
             this.checkForUpdareToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(790, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1050, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -261,7 +261,7 @@
             // 
             this.AllowDrop = true;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(790, 283);
+            this.ClientSize = new System.Drawing.Size(1050, 283);
             this.ControlBox = false;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);

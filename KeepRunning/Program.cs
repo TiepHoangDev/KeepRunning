@@ -10,7 +10,7 @@ namespace KeepRunning
 {
     static class Program
     {
-        public const string VERSION = "2020.9.3.1";
+        public const string VERSION = "2020.10.20.1";
 
         /// <summary>
         /// The main entry point for the application.

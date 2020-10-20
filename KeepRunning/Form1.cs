@@ -142,7 +142,10 @@ namespace KeepRunning
                                                     {
                                                         foreach (var p in Process.GetProcessesByName(Path.GetFileNameWithoutExtension(item.PathExe)))
                                                         {
-                                                            p.Kill();
+                                                            if (p.MainModule.FileName == item.PathExe)
+                                                            {
+                                                                p.Kill();
+                                                            }
                                                         }
                                                         Process.Start(item.PathExe);
                                                         item.Message = "re-opened";
